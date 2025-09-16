@@ -1,12 +1,11 @@
+import ListItem from "@/components/ListItem";
 import ListItemSeparator from "@/components/ListItemSeperator";
-import colors from "@/styles/colors";
 import defaultStyles from "@/styles/defaultStyles";
 import { useState } from "react";
 import {
   FlatList,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View
 } from "react-native";
 
@@ -46,15 +45,11 @@ export default function Index() {
               <ListItemSeparator color="lightblue" />
             )}
             renderItem ={({item}) => (
-              <TouchableOpacity onPress={() => itemSelected(item)}>
-                <View style={[styles.flatListRow, {
-                  backgroundColor: item.id === selectedId ? colors.primary : colors.secondary
-                }]}>
-                  <Text style={[{
-                    color: item.id === selectedId ? colors.text.light : colors.text.dark
-                  }]}>{item.title}</Text>
-                </View>
-              </TouchableOpacity>
+              <ListItem 
+                item={item}
+                isSelected={item.id === selectedId}
+                onPress={itemSelected}
+              />
             )}
           />
         </View>
@@ -66,23 +61,5 @@ export default function Index() {
 const styles = StyleSheet.create({
   flatlist: {
     alignItems: "center",
-  },
-  flatListRow: {
-    backgroundColor: "pink",
-    margin: 5,
-    padding: 5,
-    width: 100,
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-  },
-  titleContainer: {
-    marginTop: 5,
-    width: 300,
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-  },
-  titleText: {
-    fontSize: 24,
-    padding: 10,
   },
 });
